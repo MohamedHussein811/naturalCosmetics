@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: TextField(
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Search...',
                                     ),
                                     onChanged: (String searchText) {
@@ -98,9 +98,9 @@ class HomePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
@@ -172,7 +172,7 @@ class HomePage extends StatelessWidget {
                               Center(
                                 child: Text(
                                   category,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold,
@@ -203,9 +203,9 @@ class SkinPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Skin Page'),
+        title: const Text('Skin Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Skin Page Content'),
       ),
     );
@@ -217,9 +217,9 @@ class HairPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hair Page'),
+        title: const Text('Hair Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Hair Page Content'),
       ),
     );
@@ -231,9 +231,9 @@ class NailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nail Page'),
+        title: const Text('Nail Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Nail Page Content'),
       ),
     );
@@ -245,9 +245,9 @@ class TeethPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teeth Page'),
+        title: const Text('Teeth Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Teeth Page Content'),
       ),
     );
@@ -259,9 +259,9 @@ class LipsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lips Page'),
+        title: const Text('Lips Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Lips Page Content'),
       ),
     );
@@ -273,9 +273,9 @@ class EyesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eyes Page'),
+        title: const Text('Eyes Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Eyes Page Content'),
       ),
     );
