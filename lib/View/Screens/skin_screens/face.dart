@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
-import 'package:natural_cosmetics/View/Screens/skin_screens/face.dart';
 import '../../Widgets/custom_grid.dart';
 import '../../Widgets/header.dart';
-import 'body.dart';
-import 'feet.dart';
-import 'hands.dart';
+import 'face_screens/activeacne.dart';
+import 'face_screens/blackheads.dart';
+import 'face_screens/whiteheads.dart';
 
-class SkinPage extends StatelessWidget {
-  const SkinPage({
+class FacePage extends StatelessWidget {
+  const FacePage({
     Key? key,
   }) : super(key: key);
 
@@ -19,42 +18,32 @@ class SkinPage extends StatelessWidget {
 
     List<CustomGridItem> gridItems = [
       CustomGridItem(
-        imagePath: 'assets/Skin/Face.jpg',
-        title: 'Face',
+        imagePath: 'assets/Skin/ActiveAcne.jpg',
+        title: 'Active Acne',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const FacePage()),
+            MaterialPageRoute(builder: (context) => const ActiveAcne()),
           );
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Skin/Body.jpg',
-        title: 'Body',
+        imagePath: 'assets/Skin/BlackHeads.jpg',
+        title: 'Black Heads',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const BodyPage()),
+            MaterialPageRoute(builder: (context) => const BlackHeads()),
           );
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Skin/Hands.jpg',
-        title: 'Hands',
+        imagePath: 'assets/Skin/WhiteHeads.jpg',
+        title: 'White Heads',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HandsPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Skin/Feet.jpg',
-        title: 'Feet',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const FeetPage()),
+            MaterialPageRoute(builder: (context) => const WhiteHeads()),
           );
         },
       ),
@@ -67,7 +56,7 @@ class SkinPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(title: "Skin"),
+            const Header(title: "Face"),
             CustomGrid(items: gridItems),
           ],
         ),
