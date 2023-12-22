@@ -34,7 +34,7 @@ class FeetPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(title: "Face"),
+            const Header(title: "Feet"),
             CustomGrid(items: gridItems),
           ],
         ),

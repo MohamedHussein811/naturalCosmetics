@@ -39,7 +39,7 @@ class BodyPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(title: "Face"),
+            const Header(title: "Body"),
             CustomGrid(items: gridItems),
           ],
         ),
