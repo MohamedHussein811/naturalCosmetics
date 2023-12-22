@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'View/Screens/intro_screens/screen1.dart';
+import 'View/Screens/home_screens/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
       home: const HomePage(),
     );
   }
