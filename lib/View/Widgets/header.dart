@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../../Model/constants.dart';
 
 class Header extends StatelessWidget {
+  final title;
+
+  const Header({super.key,required this.title});
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,10 +32,10 @@ class Header extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'PureGlow',
+                  title,
                   style: Theme.of(context)
                       .textTheme
-                      .headline5
+                      .headlineSmall
                       ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
@@ -70,7 +74,7 @@ class Header extends StatelessWidget {
                       onChanged: (String searchText) {},
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 30,
                     height: 30,
                     child: Image.asset("assets/search.png"),

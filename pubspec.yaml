@@ -61,6 +61,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/Hair/
+    - assets/Skin/
+    - assets/Teeth/
+    - assets/Lips/
+    - assets/Nails/
+    - assets/Eyes/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

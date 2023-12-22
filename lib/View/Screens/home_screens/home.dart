@@ -18,12 +18,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     //List<String> categories = ['Skin', 'Hair', 'Nail', 'Teeth', 'Lips', 'Eyes'];
 
     List<CustomGridItem> gridItems = [
       CustomGridItem(
-        imagePath: 'assets/Skin.jpg',
+        imagePath: 'assets/Skin/Skin.jpg',
         title: 'Skin',
         onTap: () {
           Navigator.push(
@@ -33,17 +32,17 @@ class HomePage extends StatelessWidget {
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Hair.jpg',
+        imagePath: 'assets/Hair/Hair.jpg',
         title: 'Hair',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HairPage()),
+            MaterialPageRoute(builder: (context) => const HairPage()),
           );
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Nail.jpg',
+        imagePath: 'assets/Nails/Nail.jpg',
         title: 'Nail',
         onTap: () {
           Navigator.push(
@@ -53,7 +52,7 @@ class HomePage extends StatelessWidget {
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Teeth.jpg',
+        imagePath: 'assets/Teeth/Teeth.jpg',
         title: 'Teeth',
         onTap: () {
           Navigator.push(
@@ -63,7 +62,7 @@ class HomePage extends StatelessWidget {
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Lips.jpg',
+        imagePath: 'assets/Lips/Lips.jpg',
         title: 'Lips',
         onTap: () {
           Navigator.push(
@@ -73,12 +72,12 @@ class HomePage extends StatelessWidget {
         },
       ),
       CustomGridItem(
-        imagePath: 'assets/Eyes.jpg',
+        imagePath: 'assets/Eyes/Eyes.jpg',
         title: 'Eyes',
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => EyesPage()),
+            MaterialPageRoute(builder: (context) => const EyesPage()),
           );
         },
       ),
@@ -93,7 +92,7 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Header(),
+                  Header(title: "PureGlow"),
                   CustomGrid(items: gridItems),
                 ],
               ),
