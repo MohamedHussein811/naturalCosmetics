@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:natural_cosmetics/View/Screens/splash_intro_Screens/splash_screen.dart';
 
 import 'View/Screens/home_screens/home.dart';
 
@@ -11,9 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const GetMaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
