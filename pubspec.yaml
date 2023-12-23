@@ -39,6 +39,8 @@ dependencies:
   shared_preferences: ^2.2.2
   introduction_screen: ^3.1.12
   lottie: ^2.7.0
+  get_storage: ^2.1.1
+  just_audio: ^0.9.36
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,7 @@ flutter:
     - assets/Nails/
     - assets/Eyes/
     - assets/logo_intros/
+    - assets/music/
     - animations/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

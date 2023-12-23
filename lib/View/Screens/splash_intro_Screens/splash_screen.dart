@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Model/constants.dart';
+import '../../../controller/audio_controller.dart';
 import '../home_screens/home.dart';
 import 'intro_screen.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -14,11 +14,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _opacity;
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _opacity =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+
+    _animationController.forward();
+
     Future.delayed(const Duration(seconds: 4), () {
       _checkIntroStatus();
     });
@@ -27,11 +41,12 @@ class _SplashScreenState extends State<SplashScreen>
   void _checkIntroStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool hasViewedIntro = prefs.getBool('introSeen') ?? false;
-    if (hasViewedIntro) {
-      Get.off(() => const HomePage());
-    } else {
-      Get.off(() => const IntroScreen());
+    Get.find<AudioController>().dispose();
 
+    if (hasViewedIntro) {
+      Get.off(() => const HomePage(), transition: Transition.fadeIn);
+    } else {
+      Get.off(() => const IntroScreen(), transition: Transition.fadeIn);
     }
   }
 
@@ -39,6 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -47,16 +63,20 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: primaryColor,
       body: Center(
+        child: FadeTransition(
+          opacity: _opacity,
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/logo_intros/natureGlowLogo.png',
-            width: 300,
-            height: 300,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logo_intros/natureGlowLogo.png',
+                width: 300,
+                height: 300,
+              ),
+            ],
           ),
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

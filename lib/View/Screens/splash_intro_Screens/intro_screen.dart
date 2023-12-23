@@ -43,7 +43,10 @@ class _IntroScreenState extends State<IntroScreen> {
                 onDone: () => _onIntroEnd(context),
                 onSkip: () => _onIntroEnd(context),
                 pages: getPages(),
-                next: const Icon(Icons.arrow_forward,color: Colors.white,),
+                next: const Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                ),
                 dotsDecorator: const DotsDecorator(
                   activeColor: Colors.white,
                   size: Size(8.0, 8.0),
@@ -71,16 +74,28 @@ class _IntroScreenState extends State<IntroScreen> {
 
     return [
       PageViewModel(
-        title: "Welcome to Our App",
-        body: "This is an introduction to our app.",
-        image: Lottie.asset("animations/intro1.json", height: 250, fit: BoxFit.cover),
-        decoration: PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+        title: "Discover Natural Beauty",
+        body: "Explore the world of natural cosmetics and enhance your beauty with organic ingredients.",
+        image: Lottie.asset("animations/intro1.json",
+            height: 250, fit: BoxFit.cover),
+        decoration:
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
       PageViewModel(
-        title: "Welcome to Our App",
-        body: "This is an introduction to our app.",
-        image: Lottie.asset("animations/intro1.json", height: 250, fit: BoxFit.cover),
-        decoration: PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+        title: "Holistic Wellness",
+        body: "Immerse yourself in holistic wellness with our curated collection of natural beauty recipes and tips.",
+        image: Lottie.asset("animations/intro3.json",
+            height: 250, fit: BoxFit.cover),
+        decoration:
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+      ),
+      PageViewModel(
+        title: "Nourish Your Skin Naturally",
+        body: "Discover the power of nature to nourish and rejuvenate your skin with our natural cosmetic formulations.",
+        image: Lottie.asset("animations/intro4.json",
+            height: 250, fit: BoxFit.cover),
+        decoration:
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
     ];
   }
