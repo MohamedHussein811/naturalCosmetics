@@ -1,6 +1,4 @@
-// widgets.dart
 import 'package:flutter/material.dart';
-
 import 'customcard.dart';
 
 Widget buildSectionWithTitle(String title, List<String> items) {

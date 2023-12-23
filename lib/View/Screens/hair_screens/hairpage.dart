@@ -1,5 +1,3 @@
-// home_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
 import 'package:natural_cosmetics/View/Screens/hair_screens/damagedhair.dart';
