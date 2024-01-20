@@ -18,8 +18,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //List<String> categories = ['Skin', 'Hair', 'Nail', 'Teeth', 'Lips', 'Eyes'];
-
     List<CustomGridItem> gridItems = [
       CustomGridItem(
         imagePath: 'assets/Skin/Skin.jpg',

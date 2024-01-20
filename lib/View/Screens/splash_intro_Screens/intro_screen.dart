@@ -15,7 +15,7 @@ class IntroScreen extends StatefulWidget {
 
 class _IntroScreenState extends State<IntroScreen> {
   void _onIntroEnd(context) {
-    Get.to(() => const HomePage());
+    Get.off(() => const HomePage());
   }
 
   @override

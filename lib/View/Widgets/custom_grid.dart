@@ -46,7 +46,7 @@ class CustomGrid extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(48),
                       image: DecorationImage(
                         image: AssetImage(item.imagePath),
                         fit: BoxFit.cover,
@@ -57,8 +57,8 @@ class CustomGrid extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.black.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(40),
                       ),
                     ),
                   ),
