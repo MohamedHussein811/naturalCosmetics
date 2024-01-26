@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SkinPage()),
+            MaterialPageRoute(builder: (context) => const SkinPage()),
           );
         },
       ),
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NailPage()),
+            MaterialPageRoute(builder: (context) => const NailPage()),
           );
         },
       ),
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TeethPage()),
+            MaterialPageRoute(builder: (context) => const TeethPage()),
           );
         },
       ),
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LipsPage()),
+            MaterialPageRoute(builder: (context) => const LipsPage()),
           );
         },
       ),
@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Header(title: "PureGlow"),
+                  const Header(title: "PureGlow"),
                   CustomGrid(items: gridItems),
                 ],
               ),
