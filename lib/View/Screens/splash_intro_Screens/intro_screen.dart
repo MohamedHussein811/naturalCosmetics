@@ -4,7 +4,8 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
-import 'package:natural_cosmetics/View/Screens/home_screens/home.dart';
+
+import '../home_screens/HomeView.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key});
@@ -15,7 +16,7 @@ class IntroScreen extends StatefulWidget {
 
 class _IntroScreenState extends State<IntroScreen> {
   void _onIntroEnd(context) {
-    Get.off(() => const HomePage());
+    Get.off(() => HomeContent());
   }
 
   @override

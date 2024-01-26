@@ -84,5 +84,7 @@ class Assets {
   static const String teethMain = 'assets/Teeth/main.jpg';
   static const String teethTeeth = 'assets/Teeth/Teeth.jpg';
   static const String teethTeethDiscoloration = 'assets/Teeth/TeethDiscoloration.jpg';
+  static const String tenserflowLabels = 'assets/tenserflow/labels.txt';
+  static const String tenserflowModelUnquant = 'assets/tenserflow/model_unquant.tflite';
 
 }
