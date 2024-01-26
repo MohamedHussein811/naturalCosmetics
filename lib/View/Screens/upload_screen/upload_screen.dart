@@ -10,7 +10,10 @@ class UploadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Upload Image',style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Upload Image',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -23,6 +26,8 @@ class UploadPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor, foregroundColor: Colors.white),
               onPressed: () => apiController.pickImage(),
               child: const Text('Pick Image'),
             ),
@@ -71,7 +76,12 @@ class UploadPage extends StatelessWidget {
                   ),
                 );
               } else {
-                return const Text('No image selected');
+                return const Card(
+                    child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                      'Please select a photo to detect \n the possible skin diseases '),
+                ));
               }
             })
           ],
