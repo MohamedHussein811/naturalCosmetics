@@ -45,8 +45,6 @@ class ScanController extends GetxController {
       }
       update();
     } else {
-      // Handle case when the user denies camera permission
-      // You may want to show an error message or request permission again
       print('Camera permission denied');
     }
   }

@@ -5,6 +5,7 @@ import 'package:natural_cosmetics/View/Screens/home_screens/home.dart';
 
 import '../../../Model/constants.dart';
 import '../camera_screens/camera_view.dart';
+import '../upload_screen/upload_screen.dart';
 
 class HomeContent extends StatelessWidget {
   HomeContent({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class HomeContent extends StatelessWidget {
   final List<Widget> pages = [
     const HomePage(),
     const CameraView(),
+    UploadPage(),
   ];
 
   @override
@@ -23,7 +25,7 @@ class HomeContent extends StatelessWidget {
         items: const [
           Icon(Icons.home_filled, color: Colors.white,size: 34,),
           Icon(Icons.camera_alt, color: Colors.white,size: 34,),
-          //Icon(Icons.messenger_outline_outlined, color: Colors.white),
+          Icon(Icons.file_upload, color: Colors.white,size: 34,),
         ],
         backgroundColor: Colors.transparent,
         color: primaryColor,
