@@ -1,4 +1,4 @@
-import 'package:natural_cosmetics/View/Screens/homeScreens/recpie_details_page.dart';
+import 'package:natural_cosmetics/View/Screens/home_screens/recpie_details_page.dart';
 
 import '../../../Model/conditions_model.dart';
 import 'package:flutter/material.dart';

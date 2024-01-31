@@ -4,6 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../home_screens/HomeView.dart';
 
@@ -15,8 +16,11 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  void _onIntroEnd(context) {
-    Get.off(() => HomeContent());
+  Future<void> _onIntroEnd(context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('introSeen', true);
+
+    Get.off(() => HomeContent(), transition: Transition.fadeIn);
   }
 
   @override
@@ -76,29 +80,31 @@ class _IntroScreenState extends State<IntroScreen> {
     return [
       PageViewModel(
         title: "Discover Natural Beauty",
-        body: "Explore the world of natural cosmetics and enhance your beauty with organic ingredients.",
+        body:
+            "Explore the world of natural cosmetics and enhance your beauty with organic ingredients.",
         image: Lottie.asset("animations/intro1.json",
             height: 250, fit: BoxFit.cover),
         decoration:
-        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
       PageViewModel(
         title: "Holistic Wellness",
-        body: "Immerse yourself in holistic wellness with our curated collection of natural beauty recipes and tips.",
+        body:
+            "Immerse yourself in holistic wellness with our curated collection of natural beauty recipes and tips.",
         image: Lottie.asset("animations/intro3.json",
             height: 250, fit: BoxFit.cover),
         decoration:
-        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
       PageViewModel(
         title: "Nourish Your Skin Naturally",
-        body: "Discover the power of nature to nourish and rejuvenate your skin with our natural cosmetic formulations.",
+        body:
+            "Discover the power of nature to nourish and rejuvenate your skin with our natural cosmetic formulations.",
         image: Lottie.asset("animations/intro4.json",
             height: 250, fit: BoxFit.cover),
         decoration:
-        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
     ];
   }
-
 }

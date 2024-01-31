@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Model/constants.dart';
 import '../../../controller/audio_controller.dart';
-import '../home_screens/home.dart';
+import '../home_screens/HomeView.dart';
 import 'intro_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -41,11 +42,14 @@ class _SplashScreenState extends State<SplashScreen>
   void _checkIntroStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool hasViewedIntro = prefs.getBool('introSeen') ?? false;
+
     Get.find<AudioController>().dispose();
 
     if (hasViewedIntro) {
-      Get.off(() => const HomePage(), transition: Transition.fadeIn);
+      debugPrint("Intro viewed, navigating to HomePage");
+      Get.off(() => HomeContent(), transition: Transition.fadeIn);
     } else {
+      debugPrint("Intro not viewed, navigating to IntroScreen");
       Get.off(() => const IntroScreen(), transition: Transition.fadeIn);
     }
   }

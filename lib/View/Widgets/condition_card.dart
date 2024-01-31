@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getx;
 
 import '../../Model/conditions_model.dart';
-import '../Screens/homeScreens/condition_details_page.dart';
+import '../Screens/home_screens/condition_details_page.dart';
 
 class ConditionCard extends StatelessWidget {
   final Condition? condition;

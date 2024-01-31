@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getx;
 
 import '../../Model/conditions_model.dart';
-import '../Screens/homeScreens/bodypart_page.dart';
+import '../Screens/home_screens/bodypart_page.dart';
 class BodyPartCard extends StatelessWidget {
   final String bodyPart;
   final String? categoryImg;
