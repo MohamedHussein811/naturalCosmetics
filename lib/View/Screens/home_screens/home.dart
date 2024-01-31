@@ -1,102 +1,79 @@
 // home_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:natural_cosmetics/Model/constants.dart';
-import '../../Widgets/custom_grid.dart';
+import '../../../API/api_helper.dart';
+import '../../../Model/conditions_model.dart';
+import '../../Widgets/categories_card.dart';
 import '../../Widgets/header.dart';
-import '../eyes_screens/eyepage.dart';
-import '../hair_screens/hairpage.dart';
-import '../lips_screens/lipspage.dart';
-import '../nail_screens/nailpage.dart';
-import '../skin_screens/skinpage.dart';
-import '../teeth_screens/teethpage.dart';
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<CustomGridItem> gridItems = [
-      CustomGridItem(
-        imagePath: 'assets/Skin/Skin.jpg',
-        title: 'Skin',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SkinPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Hair/Hair.jpg',
-        title: 'Hair',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HairPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Nails/Nail.jpg',
-        title: 'Nail',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const NailPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Teeth/Teeth.jpg',
-        title: 'Teeth',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const TeethPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Lips/Lips.jpg',
-        title: 'Lips',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LipsPage()),
-          );
-        },
-      ),
-      CustomGridItem(
-        imagePath: 'assets/Eyes/Eyes.jpg',
-        title: 'Eyes',
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const EyesPage()),
-          );
-        },
-      ),
-    ];
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  late Future<List<Condition>> conditionsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    conditionsFuture = ApiService().fetchConditions();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: primaryColor,
-        child: SafeArea(
-          child: Container(
-            color: Colors.white,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Header(title: "PureGlow"),
-                  CustomGrid(items: gridItems),
-                ],
-              ),
+      body: Column(
+        children: [
+          const Header(title: "Nature Glow"),
+
+          Expanded(
+            child: FutureBuilder<List<Condition>>(
+              future: conditionsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No conditions found'));
+                } else {
+                  // Extracting unique body parts
+                  var uniqueBodyParts = snapshot.data!
+                      .map((condition) => condition.bodyPart)
+                      .toSet()
+                      .toList();
+                  var categories = snapshot.data!
+                      .map((condition) => condition.categoryImg)
+                      .toSet()
+                      .toList();
+            
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 3 / 2,
+                    ),
+                    itemCount: uniqueBodyParts.length,
+                    itemBuilder: (context, index) {
+                      final bodyPart = uniqueBodyParts[index];
+                      final categoryImg = categories[index];
+                      return BodyPartCard(
+                        bodyPart: bodyPart!,
+                        categoryImg: categoryImg,
+                        conditions: snapshot.data!,
+                      );
+                    },
+                  );
+                }
+              },
             ),
           ),
-        ),
+        ],
       ),
     );
   }

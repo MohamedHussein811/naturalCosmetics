@@ -9,8 +9,8 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: const EdgeInsets.only(bottom: DefaultPadding * 2.5),
+    return SizedBox(
+      //margin: const EdgeInsets.only(bottom: DefaultPadding * 2.5),
       height: size.height * 0.2,
       child: Stack(
         children: <Widget>[
@@ -24,8 +24,8 @@ class Header extends StatelessWidget {
             decoration: const BoxDecoration(
               color: primaryColor,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(36),
-                bottomRight: Radius.circular(36),
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
               ),
             ),
             child: Row(
@@ -38,7 +38,6 @@ class Header extends StatelessWidget {
                       .headlineSmall
                       ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                const Spacer(),
               ],
             ),
           ),
