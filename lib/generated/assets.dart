@@ -6,7 +6,9 @@ class Assets {
   static const String animationsIntro2 = 'animations/intro2.json';
   static const String animationsIntro3 = 'animations/intro3.json';
   static const String animationsIntro4 = 'animations/intro4.json';
+  static const String assetsPlayStore512 = 'assets/play_store_512.png';
   static const String assetsSearch = 'assets/search.png';
+  static const String assetsUntitledDesign = 'assets/Untitled_design.png';
   static const String logoIntrosNatureGlowLogo = 'assets/logo_intros/natureGlowLogo.png';
   static const String musicBacgroundMusic = 'assets/music/bacground_music.mp3';
   static const String tenserflowLabels = 'assets/tenserflow/labels.txt';
