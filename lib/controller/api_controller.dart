@@ -12,7 +12,7 @@ class ApiController extends GetxController {
   var bodyPartData = ''.obs;
   var resultData = ''.obs;
   var diseaseData = <String, double>{}.obs;
-  final String _api_key="yndxmf5NBpvFqYJU8ItSRM9GlOusFZhz5IDtsMvxVaWrAAk3emb4YZBferuOQUSQ";
+  final String _api_key="k7RWycBmrgACjrYfHoWetxi76YAg9i5T1ZUVMLSXFva4EydTleGEzJk2Nq2nUpwX";
   final String url="https://www.ailabapi.com/api/portrait/analysis/skin-disease-detection";
   final Dio _dio = Dio();
   final picker = ImagePicker();

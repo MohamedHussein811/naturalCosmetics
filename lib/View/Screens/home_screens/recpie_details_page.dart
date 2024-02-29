@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/header_text.dart';
 
-
 class RecipeDetailPage extends StatelessWidget {
   final Recipe? recipe;
 
@@ -26,8 +25,8 @@ class RecipeDetailPage extends StatelessWidget {
               ...recipe?.ingredients?.map(
                     (ingredient) => ListTile(
                   leading: const Icon(Icons.arrow_right),
-                  title: bodyText(
-                    text: ingredient,
+                  title: Text(
+                    ingredient,
                   ),
                 ),
               ) ??
@@ -38,8 +37,8 @@ class RecipeDetailPage extends StatelessWidget {
               ...recipe?.howToPrepare?.map(
                     (step) => ListTile(
                   leading: const Icon(Icons.arrow_right),
-                  title: bodyText(
-                    text: step,
+                  title: Text(
+                    step,
                   ),
                 ),
               ) ??
@@ -50,12 +49,35 @@ class RecipeDetailPage extends StatelessWidget {
               ...recipe?.howToUse?.map(
                     (step) => ListTile(
                   leading: const Icon(Icons.arrow_right),
-                  title: bodyText(
-                    text: step,
+                  title: Text(
+                    step,
                   ),
                 ),
               ) ??
                   [],
+              const SizedBox(height: 20),
+              const HeaderText(text: 'Images'),
+              const SizedBox(height: 10),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10.0,
+                children: List.generate(
+                  recipe?.images?.length ?? 0,
+                      (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(Radius.circular(15)),
+                        child: Image.network(
+                          recipe!.images![index],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
