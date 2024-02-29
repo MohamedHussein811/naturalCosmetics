@@ -6,7 +6,6 @@ import '../../../Model/conditions_model.dart';
 import '../../Widgets/categories_card.dart';
 import '../../Widgets/header.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
@@ -31,7 +30,6 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           const Header(title: "Nature Glow"),
-
           Expanded(
             child: FutureBuilder<List<Condition>>(
               future: conditionsFuture,
@@ -43,7 +41,6 @@ class _HomePageState extends State<HomePage> {
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text('No conditions found'));
                 } else {
-                  // Extracting unique body parts
                   var uniqueBodyParts = snapshot.data!
                       .map((condition) => condition.bodyPart)
                       .toSet()
@@ -52,9 +49,10 @@ class _HomePageState extends State<HomePage> {
                       .map((condition) => condition.categoryImg)
                       .toSet()
                       .toList();
-            
+
                   return GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 3 / 2,
                     ),

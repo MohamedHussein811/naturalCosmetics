@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import '../Model/conditions_model.dart';
-import '../Model/skin_detection_api_model.dart';
 
 class ApiService {
   final Dio _dio = Dio();

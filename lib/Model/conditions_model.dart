@@ -7,6 +7,7 @@ class Condition {
   final List<String>? usefulTips;
   final List<Recipe>? recipes;
   final List<String>? causes;
+  final List<String>? links;
 
   Condition({
     required this.conditionName,
@@ -17,6 +18,7 @@ class Condition {
     this.usefulTips,
     this.recipes,
     this.causes,
+    this.links, // Initialize the links field
   });
 
   factory Condition.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Condition {
       usefulTips: (json['useful_tips'] as List<dynamic>?)?.map((e) => e as String).toList(),
       recipes: (json['recipes'] as List<dynamic>?)?.map((x) => Recipe.fromJson(x)).toList(),
       causes: (json['causes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      links: (json['links'] as List<dynamic>?)?.map((e) => e as String).toList(), // Parse links from JSON
     );
   }
 }
