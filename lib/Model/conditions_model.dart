@@ -7,7 +7,6 @@ class Condition {
   final List<String>? usefulTips;
   final List<Recipe>? recipes;
   final List<String>? causes;
-  final List<String>? links;
 
   Condition({
     required this.conditionName,
@@ -18,7 +17,6 @@ class Condition {
     this.usefulTips,
     this.recipes,
     this.causes,
-    this.links, // Initialize the links field
   });
 
   factory Condition.fromJson(Map<String, dynamic> json) {
@@ -31,7 +29,6 @@ class Condition {
       usefulTips: (json['useful_tips'] as List<dynamic>?)?.map((e) => e as String).toList(),
       recipes: (json['recipes'] as List<dynamic>?)?.map((x) => Recipe.fromJson(x)).toList(),
       causes: (json['causes'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      links: (json['links'] as List<dynamic>?)?.map((e) => e as String).toList(), // Parse links from JSON
     );
   }
 }
@@ -42,6 +39,7 @@ class Recipe {
   final List<String>? images;
   final List<String>? howToPrepare;
   final List<String>? howToUse;
+  final List<Link>? links; // Change type to List<Link>
 
   Recipe({
     required this.recipeName,
@@ -49,6 +47,7 @@ class Recipe {
     this.images,
     this.howToPrepare,
     this.howToUse,
+    this.links,
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -58,6 +57,24 @@ class Recipe {
       images: (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       howToPrepare: (json['how_to_prepare'] as List<dynamic>?)?.map((e) => e as String).toList(),
       howToUse: (json['how_to_use'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      links: (json['links'] as List<dynamic>?)?.map((e) => Link.fromJson(e)).toList(), // Parse links as Link objects
+    );
+  }
+}
+
+class Link {
+  final String linkText;
+  final String url;
+
+  Link({
+    required this.linkText,
+    required this.url,
+  });
+
+  factory Link.fromJson(Map<String, dynamic> json) {
+    return Link(
+      linkText: json['link_text'] as String,
+      url: json['url'] as String,
     );
   }
 }

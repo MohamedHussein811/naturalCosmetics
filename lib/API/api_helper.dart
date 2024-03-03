@@ -8,7 +8,7 @@ class ApiService {
   final Dio _dio = Dio();
   // final String _api_key="k7RWycBmrgACjrYfHoWetxi76YAg9i5T1ZUVMLSXFva4EydTleGEzJk2Nq2nUpwX";
   final String url="https://www.ailabapi.com/api/portrait/analysis/skin-disease-detection";
-  final String baseUrl = 'https://raw.githubusercontent.com/KIRRAA0/natural_cosmetics_data/main/diseases_data.json';
+  final String baseUrl = 'https://raw.githubusercontent.com/MohamedHussein811/natural_cosmetics_data/main/diseases_data.json';
 
   // Future<ApiResponse> fetchData() async {
   //   print("TESTTTTTT");

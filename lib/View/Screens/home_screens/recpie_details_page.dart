@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/header_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RecipeDetailPage extends StatelessWidget {
   final Recipe? recipe;
 
   RecipeDetailPage({Key? key, required this.recipe}) : super(key: key);
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +86,23 @@ class RecipeDetailPage extends StatelessWidget {
                   },
                 ),
               ),
+              const SizedBox(height: 20),
+              const HeaderText(text: 'Read More'),
+              const SizedBox(height: 10),
+              ...recipe?.links?.map(
+                    (link) => ListTile(
+                  leading: const Icon(Icons.link),
+                  title: Text(
+                    link.linkText,
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    _launchURL(link.url);
+
+                  },
+                ),
+              ) ??
+                  [],
             ],
           ),
         ),
