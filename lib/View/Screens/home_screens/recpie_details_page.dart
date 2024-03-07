@@ -6,14 +6,19 @@ import 'package:url_launcher/url_launcher.dart';
 class RecipeDetailPage extends StatelessWidget {
   final Recipe? recipe;
 
-  RecipeDetailPage({Key? key, required this.recipe}) : super(key: key);
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  const RecipeDetailPage({Key? key, required this.recipe}) : super(key: key);
+
+  void _launchURL(String urlString) async {
+    final String trimmedUrlString = urlString.trim();
+    final Uri url = Uri.parse(trimmedUrlString);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
-      throw 'Could not launch $url';
+      throw 'Could not launch $trimmedUrlString';
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
