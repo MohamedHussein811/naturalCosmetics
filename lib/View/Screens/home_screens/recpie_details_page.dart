@@ -18,8 +18,6 @@ class RecipeDetailPage extends StatelessWidget {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,36 +35,36 @@ class RecipeDetailPage extends StatelessWidget {
               const SizedBox(height: 10),
               ...recipe?.ingredients?.map(
                     (ingredient) => ListTile(
-                  leading: const Icon(Icons.arrow_right),
-                  title: Text(
-                    ingredient,
-                  ),
-                ),
-              ) ??
+                      leading: const Icon(Icons.arrow_right),
+                      title: Text(
+                        ingredient,
+                      ),
+                    ),
+                  ) ??
                   [],
               const SizedBox(height: 20),
               const HeaderText(text: 'How to Prepare'),
               const SizedBox(height: 10),
               ...recipe?.howToPrepare?.map(
                     (step) => ListTile(
-                  leading: const Icon(Icons.arrow_right),
-                  title: Text(
-                    step,
-                  ),
-                ),
-              ) ??
+                      leading: const Icon(Icons.arrow_right),
+                      title: Text(
+                        step,
+                      ),
+                    ),
+                  ) ??
                   [],
               const SizedBox(height: 20),
               const HeaderText(text: 'How to Use'),
               const SizedBox(height: 10),
               ...recipe?.howToUse?.map(
                     (step) => ListTile(
-                  leading: const Icon(Icons.arrow_right),
-                  title: Text(
-                    step,
-                  ),
-                ),
-              ) ??
+                      leading: const Icon(Icons.arrow_right),
+                      title: Text(
+                        step,
+                      ),
+                    ),
+                  ) ??
                   [],
               const SizedBox(height: 20),
               const HeaderText(text: 'Images'),
@@ -77,11 +75,12 @@ class RecipeDetailPage extends StatelessWidget {
                 crossAxisSpacing: 10.0,
                 children: List.generate(
                   recipe?.images?.length ?? 0,
-                      (index) {
+                  (index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
                         child: Image.network(
                           recipe!.images![index],
                           fit: BoxFit.cover,
@@ -96,17 +95,16 @@ class RecipeDetailPage extends StatelessWidget {
               const SizedBox(height: 10),
               ...recipe?.links?.map(
                     (link) => ListTile(
-                  leading: const Icon(Icons.link),
-                  title: Text(
-                    link.linkText,
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  onTap: () {
-                    _launchURL(link.url);
-
-                  },
-                ),
-              ) ??
+                      leading: const Icon(Icons.link),
+                      title: Text(
+                        link.linkText,
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                      onTap: () {
+                        _launchURL(link.url);
+                      },
+                    ),
+                  ) ??
                   [],
             ],
           ),

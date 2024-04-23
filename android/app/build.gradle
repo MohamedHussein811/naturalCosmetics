@@ -12,16 +12,21 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
+
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+    flutterVersionCode = '1' // Set a default version code if not specified
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
+    flutterVersionName = '1.0' // Set a default version name if not specified
 }
-
 android {
     namespace "com.example.natural_cosmetics"
     compileSdkVersion 34
@@ -50,29 +55,33 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.natural_cosmetics"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        applicationId "com.MSA.natural_cosmetics"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             shrinkResources true
             minifyEnabled true
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
-        debug{
+        debug {
             minifyEnabled true
         }
     }
+
 }
 
 flutter {
