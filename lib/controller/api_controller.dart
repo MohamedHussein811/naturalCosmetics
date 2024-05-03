@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
+import '../API/api_helper.dart';
+import '../Model/api_key_model.dart';
 import '../Model/skin_detection_api_model.dart';
 
 class ApiController extends GetxController {
@@ -12,10 +15,12 @@ class ApiController extends GetxController {
   var bodyPartData = ''.obs;
   var resultData = ''.obs;
   var diseaseData = <String, double>{}.obs;
-  final String _api_key="k7RWycBmrgACjrYfHoWetxi76YAg9i5T1ZUVMLSXFva4EydTleGEzJk2Nq2nUpwX";
-  final String url="https://www.ailabapi.com/api/portrait/analysis/skin-disease-detection";
+  var apiKey = ''.obs;
+  late final ApiService _apiService;
   final Dio _dio = Dio();
   final picker = ImagePicker();
+
+  ApiController(this._apiService);
 
   Future<void> pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -31,12 +36,17 @@ class ApiController extends GetxController {
     isLoading.value = true;
 
     try {
-      _dio.options.headers['ailabapi-api-key'] = _api_key;
+      final ApiKeyResponse fetchedApiKeyResponse = await _apiService.fetchKey();
+      final String fetchedApiKey = fetchedApiKeyResponse.key; // Extract the key
+      apiKey.value = fetchedApiKey; // Assign only the key to apiKey
+
+      _dio.options.headers['ailabapi-api-key'] = fetchedApiKey;
+
       var formData = dio.FormData.fromMap({
         'image': await dio.MultipartFile.fromFile(selectedImage.value!.path),
       });
 
-      final response = await _dio.post(url, data: formData);
+      final response = await _dio.post(_apiService.url, data: formData);
 
       if (response.statusCode == 200) {
         ApiResponse apiResponse = ApiResponse.fromJson(response.data);

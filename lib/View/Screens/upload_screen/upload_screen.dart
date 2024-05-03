@@ -4,7 +4,7 @@ import 'package:natural_cosmetics/Model/constants.dart';
 import '../../../controller/api_controller.dart';
 
 class UploadPage extends StatelessWidget {
-  final ApiController apiController = Get.put(ApiController());
+  final ApiController apiController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,7 @@ class UploadPage extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-              gradient:
-                  LinearGradient(colors: [primaryColor, Colors.tealAccent])),
+              gradient: LinearGradient(colors: [primaryColor, Colors.tealAccent])),
         ),
       ),
       body: Center(
@@ -51,12 +50,12 @@ class UploadPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         ...apiController.diseaseData
                             .map((disease, probability) => MapEntry(
-                                  disease,
-                                  Text(
-                                    "• $disease: ${(probability * 100).toStringAsFixed(2)}%",
-                                    style: const TextStyle(fontSize: 16.0),
-                                  ),
-                                ))
+                          disease,
+                          Text(
+                            "• $disease: ${(probability * 100).toStringAsFixed(2)}%",
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                        ))
                             .values
                             .toList(),
                         const Text(
@@ -78,12 +77,20 @@ class UploadPage extends StatelessWidget {
               } else {
                 return const Card(
                     child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                      'Please select a photo to detect \n the possible skin diseases '),
-                ));
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Please select a photo to detect \n the possible skin diseases '),
+                    ));
               }
-            })
+            }),
+            Obx(() {
+              return Text(
+                apiController.apiKey.value.isEmpty
+                    ? 'No API key available'
+                    : 'API Key: ${apiController.apiKey.value}',
+                style: const TextStyle(fontSize: 16.0, color: Colors.black),
+              );
+            }),
           ],
         ),
       ),

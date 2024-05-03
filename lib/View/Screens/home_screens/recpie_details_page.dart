@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/header_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,14 +10,17 @@ class RecipeDetailPage extends StatelessWidget {
   const RecipeDetailPage({Key? key, required this.recipe}) : super(key: key);
 
   void _launchURL(String urlString) async {
-    final String trimmedUrlString = urlString.trim();
-    final Uri url = Uri.parse(trimmedUrlString);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $trimmedUrlString';
+    final Uri url = Uri.parse(urlString.trim());
+    try {
+      final launchResult = await launchUrl(url, mode: LaunchMode.externalApplication);
+      print('Launch result: $launchResult');
+    } catch (e) {
+      print('Could not launch $urlString: $e');
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +74,7 @@ class RecipeDetailPage extends StatelessWidget {
               const HeaderText(text: 'Images'),
               const SizedBox(height: 10),
               GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.0,
