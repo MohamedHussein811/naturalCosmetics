@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:natural_cosmetics/Model/constants.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/header_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class RecipeDetailPage extends StatelessWidget {
   final Recipe? recipe;
 
-  const RecipeDetailPage({Key? key, required this.recipe}) : super(key: key);
+  const RecipeDetailPage({super.key, required this.recipe});
 
   void _launchURL(String urlString) async {
     final Uri url = Uri.parse(urlString.trim());
@@ -26,7 +26,7 @@ class RecipeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: primaryColor,
         title: Text(recipe?.recipeName ?? 'Recipe Details'),
       ),
       body: SingleChildScrollView(

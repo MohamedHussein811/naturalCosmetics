@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:natural_cosmetics/Model/constants.dart';
 import 'package:natural_cosmetics/View/Screens/home_screens/recpie_details_page.dart';
 
 import '../../../Model/conditions_model.dart';
@@ -20,13 +22,14 @@ class ConditionDetailPage extends StatelessWidget {
             expandedHeight: 200.0,
             floating: false,
             pinned: true,
+            backgroundColor: primaryColor,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(condition!.conditionName),
+              title: Text(condition!.conditionName,style: TextStyle(color: Colors.white),),
               background: Hero(
                 tag: condition?.conditionImg ?? '',
-                child: Image.network(
-                  condition?.conditionImg ?? '',
+                child: CachedNetworkImage(
                   fit: BoxFit.cover,
+                  imageUrl: condition?.conditionImg ?? '',
                 ),
               ),
             ),
@@ -59,7 +62,7 @@ class ConditionDetailPage extends StatelessWidget {
                     height: 10,
                   ),
                   ...?condition?.usefulTips?.map(
-                        (tip) => ListTile(
+                    (tip) => ListTile(
                       leading: const Icon(Icons.health_and_safety_outlined),
                       title: Text(tip),
                     ),
@@ -72,7 +75,14 @@ class ConditionDetailPage extends StatelessWidget {
                     text: "Recipes",
                   ),
                   ...?condition?.recipes?.map(
-                        (recipe) => ListTile(
+                    (recipe) => ListTile(
+                      isThreeLine: true,
+                      splashColor: Colors.teal.shade900,
+                      focusColor: Colors.teal.shade900,
+                      shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      tileColor: Theme.of(context).primaryColor,
                       title: Text(recipe.recipeName),
                       subtitle: recipe.ingredients != null
                           ? Text(recipe.ingredients!.join(", "))

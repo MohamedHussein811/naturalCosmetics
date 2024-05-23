@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../API/api_helper.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/categories_card.dart';
+import '../../Widgets/custom_appbar.dart';
 import '../../Widgets/header.dart';
 
 class HomePage extends StatefulWidget {

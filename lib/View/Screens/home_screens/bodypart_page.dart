@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:natural_cosmetics/Model/constants.dart';
 
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/condition_card.dart';
@@ -21,6 +22,7 @@ class BodyPartConditionsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: primaryColor,
         title: Text('Conditions for $bodyPart'),
       ),
       body: GridView.builder(
