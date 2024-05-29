@@ -4,14 +4,16 @@ import 'package:natural_cosmetics/Model/constants.dart';
 
 class CustomSwitch extends StatefulWidget {
   final String leadingText;
-  final bool value;  // Added this line
+  final bool value;
   final Function(bool) onToggle;
+  final double? fontSize;
 
   const CustomSwitch({
     super.key,
     required this.leadingText,
-    required this.value,  // Added this line
-    required this.onToggle
+    required this.value,
+    required this.onToggle,
+    this.fontSize,
   });
 
   @override
@@ -24,17 +26,21 @@ class _CustomSwitchState extends State<CustomSwitch> {
   @override
   void initState() {
     super.initState();
-    _switchValue = widget.value; // Initialize switch state with the passed value
+    _switchValue = widget.value;
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double defaultFontSize = size.height * 0.02;
+    double fontSize = widget.fontSize ?? defaultFontSize;
+
     return Column(
       children: [
         ListTile(
           leading: Text(
             widget.leadingText,
-            style: const TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: fontSize),
           ),
           trailing: CupertinoSwitch(
             activeColor: primaryColor,

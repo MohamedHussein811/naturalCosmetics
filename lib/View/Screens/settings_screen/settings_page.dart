@@ -11,6 +11,10 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double fontSize = size.height * 0.02; // Responsive font size
+    double dividerIndent = size.width * 0.2; // Responsive divider indent
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings', style: TextStyle(color: Colors.white)),
@@ -20,27 +24,35 @@ class SettingsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Obx(() => CustomSwitch(
-              leadingText: 'Music On/Off',
-              onToggle: (bool value) {
-                audioController.toggleAudio(value);
-              },
-              value: audioController.isPlaying.value, // ensure this is an observable
-              key: const ValueKey('musicSwitch'),
-            )),
-            const Divider(
-              indent: 100,
-              endIndent: 100,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02), // Responsive padding
+              child: Obx(() => CustomSwitch(
+                leadingText: 'Music On/Off',
+                onToggle: (bool value) {
+                  audioController.toggleAudio(value);
+                },
+                value: audioController.isPlaying.value, // Ensure this is an observable
+                key: const ValueKey('musicSwitch'),
+                fontSize: fontSize, // Pass the responsive font size to the CustomSwitch
+              )),
+            ),
+            Divider(
+              indent: dividerIndent,
+              endIndent: dividerIndent,
               color: Colors.grey,
             ),
-            Obx(() => CustomSwitch(
-              leadingText: 'Dark Mode',
-              onToggle: (bool value) {
-                themeController.switchTheme(value);
-              },
-              value: themeController.isDarkMode, // ensure this is an observable
-              key: const ValueKey('themeSwitch'),
-            )),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02), // Responsive padding
+              child: Obx(() => CustomSwitch(
+                leadingText: 'Dark Mode',
+                onToggle: (bool value) {
+                  themeController.switchTheme(value);
+                },
+                value: themeController.isDarkMode, // Ensure this is an observable
+                key: const ValueKey('themeSwitch'),
+                fontSize: fontSize, // Pass the responsive font size to the CustomSwitch
+              )),
+            ),
           ],
         ),
       ),

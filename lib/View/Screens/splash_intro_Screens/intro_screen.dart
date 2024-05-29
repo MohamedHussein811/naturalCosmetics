@@ -25,6 +25,10 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double heightFactor = size.height / 800;
+    final double widthFactor = size.width / 400;
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: SafeArea(
@@ -32,35 +36,38 @@ class _IntroScreenState extends State<IntroScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 125,
+            SizedBox(
+              height: 125 * heightFactor,
             ),
             Expanded(
               child: IntroductionScreen(
                 globalBackgroundColor: primaryColor,
-                done: const Text(
+                done: Text(
                   "Done",
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 18 * widthFactor,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
                 onDone: () => _onIntroEnd(context),
                 onSkip: () => _onIntroEnd(context),
-                pages: getPages(),
-                next: const Icon(
+                pages: getPages(heightFactor, widthFactor),
+                next: Icon(
                   Icons.arrow_forward,
                   color: Colors.white,
+                  size: 24 * widthFactor,
                 ),
-                dotsDecorator: const DotsDecorator(
+                dotsDecorator: DotsDecorator(
                   activeColor: Colors.white,
-                  size: Size(8.0, 8.0),
+                  size: Size(8.0 * widthFactor, 8.0 * heightFactor),
                   color: Colors.grey,
-                  activeSize: Size(15.0, 16.0),
+                  activeSize: Size(15.0 * widthFactor, 16.0 * heightFactor),
                 ),
-                skip: const Text('Skip',
+                skip: Text('Skip',
                     style: TextStyle(
-                        fontWeight: FontWeight.w400, color: Colors.white)),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                        fontSize: 18 * widthFactor)),
                 showSkipButton: true,
               ),
             ),
@@ -70,10 +77,10 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 
-  List<PageViewModel> getPages() {
-    TextStyle textStyle = const TextStyle(
+  List<PageViewModel> getPages(double heightFactor, double widthFactor) {
+    TextStyle textStyle = TextStyle(
       color: Colors.white,
-      fontSize: 18,
+      fontSize: 18 * widthFactor,
       fontWeight: FontWeight.bold,
     );
 
@@ -81,29 +88,29 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         title: "Discover Natural Beauty",
         body:
-            "Explore the world of natural cosmetics and enhance your beauty with organic ingredients.",
+        "Explore the world of natural cosmetics and enhance your beauty with organic ingredients.",
         image: Lottie.asset("animations/intro1.json",
-            height: 250, fit: BoxFit.cover),
+            height: 250 * heightFactor, fit: BoxFit.cover),
         decoration:
-            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
       PageViewModel(
         title: "Holistic Wellness",
         body:
-            "Immerse yourself in holistic wellness with our curated collection of natural beauty recipes and tips.",
+        "Immerse yourself in holistic wellness with our curated collection of natural beauty recipes and tips.",
         image: Lottie.asset("animations/intro3.json",
-            height: 250, fit: BoxFit.cover),
+            height: 250 * heightFactor, fit: BoxFit.cover),
         decoration:
-            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
       PageViewModel(
         title: "Nourish Your Skin Naturally",
         body:
-            "Discover the power of nature to nourish and rejuvenate your skin with our natural cosmetic formulations.",
+        "Discover the power of nature to nourish and rejuvenate your skin with our natural cosmetic formulations.",
         image: Lottie.asset("animations/intro4.json",
-            height: 250, fit: BoxFit.cover),
+            height: 250 * heightFactor, fit: BoxFit.cover),
         decoration:
-            PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
+        PageDecoration(titleTextStyle: textStyle, bodyTextStyle: textStyle),
       ),
     ];
   }

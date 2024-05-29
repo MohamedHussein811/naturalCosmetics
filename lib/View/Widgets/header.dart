@@ -10,6 +10,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return ClipPath(
       clipper: WaveClipperOne(),
       child: Container(
@@ -23,9 +24,8 @@ class Header extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: size.height * 0.2,
-                  padding: const EdgeInsets.only(
-                    left: DefaultPadding,
-                    right: DefaultPadding,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DefaultPadding,
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +33,7 @@ class Header extends StatelessWidget {
                     children: [
                       Image.asset(
                         "assets/Nature.png",
-                        width: 350,
+                        width: size.width * 0.8,
                       ),
                     ],
                   ),

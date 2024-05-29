@@ -6,6 +6,7 @@ import 'package:natural_cosmetics/themes/themes.dart';
 import 'API/api_helper.dart';
 import 'controller/api_controller.dart';
 import 'controller/audio_controller.dart';
+import 'controller/conditions_controller.dart';
 import 'controller/theme_controller.dart';
 
 void main() {
@@ -15,6 +16,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final ThemeController themeController = Get.put(ThemeController());
 
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => GetMaterialApp(
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       initialBinding: BindingsBuilder(() {
         Get.put(AudioController(), permanent: true);
+        Get.put(ConditionsController());
         final ApiService apiService = ApiService();
         Get.put(ApiController(apiService));
       }),
