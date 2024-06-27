@@ -4,13 +4,16 @@ import 'package:dio/dio.dart';
 
 import '../Model/api_key_model.dart';
 import '../Model/conditions_model.dart';
-import '../Model/skin_detection_api_model.dart';
 
 class ApiService {
   final Dio _dio = Dio();
-  final String url="https://www.ailabapi.com/api/portrait/analysis/skin-disease-detection";
-  final String baseUrl ='https://raw.githubusercontent.com/KIRRAA0/natural_cosmetics_data/main/diseases_data.json';
-  final String APIUrl ='https://raw.githubusercontent.com/KIRRAA0/AIlabTools_API_KEY/main/api_key.json?token=GHSAT0AAAAAACRBKUF2GIWNSPDJZ6JUVNV2ZRVDCXA';
+  final String url =
+      "https://www.ailabapi.com/api/portrait/analysis/skin-disease-detection";
+  final String baseUrl =
+      'https://raw.githubusercontent.com/KIRRAA0/natural_cosmetics_data/main/diseases_data.json';
+  final String APIUrl =
+      'https://raw.githubusercontent.com/KIRRAA0/AIlabTools_API_KEY/main/api_key.json?token=GHSAT0AAAAAACRBKUF2GIWNSPDJZ6JUVNV2ZRVDCXA';
+
   Future<List<Condition>> fetchConditions() async {
     try {
       final response = await _dio.get(baseUrl);
@@ -25,6 +28,7 @@ class ApiService {
       throw Exception('Error occurred while fetching data');
     }
   }
+
   Future<ApiKeyResponse> fetchKey() async {
     try {
       final response = await _dio.get(APIUrl);
@@ -33,15 +37,12 @@ class ApiService {
         final data = jsonDecode(response.data);
         return ApiKeyResponse.fromJson(data);
       } else {
-        throw Exception('Failed to load data, status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to load data, status code: ${response.statusCode}');
       }
     } catch (e) {
       print('Failed to fetch API key: $e');
       throw Exception('Failed to fetch data: $e');
     }
   }
-
-
-
-
 }

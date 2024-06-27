@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
 import 'package:natural_cosmetics/View/Screens/home_screens/recpie_details_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Model/conditions_model.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,15 @@ import '../../Widgets/header_text.dart';
 
 class ConditionDetailPage extends StatelessWidget {
   final Condition? condition;
+  void _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString.trim());
+    try {
+      final launchResult = await launchUrl(url, mode: LaunchMode.externalApplication);
+      print('Launch result: $launchResult');
+    } catch (e) {
+      print('Could not launch $urlString: $e');
+    }
+  }
 
   ConditionDetailPage({Key? key, required this.condition}) : super(key: key);
 
@@ -52,6 +62,20 @@ class ConditionDetailPage extends StatelessWidget {
                     height: 10,
                   ),
                   const Divider(),
+                  const HeaderText(
+                    text: "Medical Resources",
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.link),
+                    title: const Text(
+                      'Medical Resource',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    onTap: () {
+                      _launchURL(condition!.conditionLink!);
+                    },
+                  ),
+                  const Divider(thickness: 0.9,),
                   const SizedBox(
                     height: 10,
                   ),

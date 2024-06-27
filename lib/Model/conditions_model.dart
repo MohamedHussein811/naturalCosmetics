@@ -1,5 +1,6 @@
 class Condition {
   final String conditionName;
+  final String? conditionLink;
   final String? bodyPart;
   final String? categoryImg;
   final String? conditionImg;
@@ -10,6 +11,7 @@ class Condition {
 
   Condition({
     required this.conditionName,
+    this.conditionLink,
     this.bodyPart,
     this.categoryImg,
     this.conditionImg,
@@ -22,6 +24,7 @@ class Condition {
   factory Condition.fromJson(Map<String, dynamic> json) {
     return Condition(
       conditionName: json['condition_name'] as String? ?? 'Unknown',
+      conditionLink: json['condition_link'] as String? ?? 'Unknown',
       bodyPart: json['body_part'] as String?,
       categoryImg: json['category_img'] as String?,
       conditionImg: json['condition_img'] as String?,

@@ -96,7 +96,7 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const HeaderText(text: 'Read More'),
+              const HeaderText(text: 'Medical Resources'),
               const SizedBox(height: 10),
               ...recipe?.links?.map(
                     (link) => ListTile(
