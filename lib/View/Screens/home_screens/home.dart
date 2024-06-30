@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ConditionsController conditionsController = Get.find();
-
+    conditionsController.fetchConditions();
     return Scaffold(
       body: Column(
         children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
 import '../../../API/api_helper.dart';
+import '../../../Service/localization.dart';
 import '../../../controller/api_controller.dart';
 import '../../../controller/treatment_controller.dart';
 
@@ -43,94 +44,110 @@ class TreatmentPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Details and treatment for $diseaseName using natural remedies will be shown here.',
-                    style: TextStyle(fontSize: buttonFontSize, color: Colors.white),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '${'Details and treatment for '.tr}$diseaseName${' using natural remedies will be shown here.'.tr}',
+                      style: TextStyle(fontSize: buttonFontSize, color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: size.height * 0.02),
-              Obx(() {
-                if (treatmentController.isLoading.value) {
-                  return Column(
-                    children: [
-                      const CircularProgressIndicator(color: primaryColor,),
-                      SizedBox(height: size.height * 0.02),
-                      Text(
-                        'Response is being generated...',
-                        style: TextStyle(fontSize: buttonFontSize),
+                SizedBox(height: size.height * 0.02),
+                Obx(() {
+                  if (treatmentController.isLoading.value) {
+                    return Column(
+                      children: [
+                        const CircularProgressIndicator(color: primaryColor,),
+                        SizedBox(height: size.height * 0.02),
+                        Text(
+                          'Response is being generated...',
+                          style: TextStyle(fontSize: buttonFontSize),
+                        ),
+                      ],
+                    );
+                  } else if (treatmentController.errorMessage.isNotEmpty) {
+                    return Text(
+                      treatmentController.errorMessage.value,
+                      style: TextStyle(fontSize: buttonFontSize, color: Colors.red),
+                    );
+                  } else if (treatmentController.responseMessage.isNotEmpty) {
+                    return buildFormattedText(context, treatmentController.responseMessage.value, buttonFontSize);
+                  } else {
+                    return Container();
+                  }
+                }),
+                SizedBox(height: size.height * 0.02),
+                Obx(() {
+                  return treatmentController.isButtonVisible.value
+                      ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.014,
+                        horizontal: size.width * 0.1,
                       ),
-                    ],
-                  );
-                } else if (treatmentController.errorMessage.isNotEmpty) {
-                  return Text(
-                    treatmentController.errorMessage.value,
-                    style: TextStyle(fontSize: buttonFontSize, color: Colors.red),
-                  );
-                } else if (treatmentController.responseMessage.isNotEmpty) {
-                  return buildFormattedText(context, treatmentController.responseMessage.value, buttonFontSize);
-                } else {
-                  return Container();
-                }
-              }),
-              SizedBox(height: size.height * 0.02),
-              Obx(() {
-                return treatmentController.isButtonVisible.value
-                    ? ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                      vertical: size.height * 0.014,
-                      horizontal: size.width * 0.1,
                     ),
-                  ),
-                  onPressed: () async {
-                    try {
-                      // Construct the prompt with the disease name
-                      String prompt = "provide me 2 treatments for $diseaseName using natural remedies but provide summed up response";
+                    onPressed: () async {
+                      try {
+                        // Fetch and print the current locale for debugging
+                        var locale = LocalizationService().currentLocale;
+                        print("Current Locale: $locale");
 
-                      // Set loading to true
-                      treatmentController.setLoading(true);
+                        String? prompt;
+                        String englishPrompt = "provide me 2 treatments for $diseaseName using natural remedies but provide summed up response";
+                        String arabicPrompt = "قدمني بعلاجين لمرض $diseaseName باستخدام العلاجات الطبيعية لكن بشكل مختصر";
 
-                      // Reset previous messages
-                      treatmentController.setResponseMessage('');
-                      treatmentController.setErrorMessage('');
+                        // Ensure correct locale comparison
+                        if (locale.languageCode == 'ar') {
+                          prompt = arabicPrompt;
+                        } else {
+                          prompt = englishPrompt;
+                        }
 
-                      String responseMessage = await apiService.sendMessage(prompt);
+                        print("Selected Prompt: $prompt");
 
-                      // Set the response message
-                      treatmentController.setResponseMessage(responseMessage);
+                        // Set loading to true
+                        treatmentController.setLoading(true);
 
-                      // Hide the button after response is received
-                      treatmentController.setButtonVisible(false);
-                    } catch (e) {
-                      // Set the error message
-                      treatmentController.setErrorMessage('Error sending message: $e');
-                    } finally {
-                      // Set loading to false
-                      treatmentController.setLoading(false);
-                    }
-                  },
-                  child: Text(
-                    'View Treatment'.tr,
-                    style: TextStyle(
-                      fontSize: buttonFontSize, // Use responsive font size
+                        // Reset previous messages
+                        treatmentController.setResponseMessage('');
+                        treatmentController.setErrorMessage('');
+
+                        String responseMessage = await apiService.sendMessage(prompt);
+
+                        // Set the response message
+                        treatmentController.setResponseMessage(responseMessage);
+
+                        // Hide the button after response is received
+                        treatmentController.setButtonVisible(false);
+                      } catch (e) {
+                        // Set the error message
+                        treatmentController.setErrorMessage('Error sending message: $e');
+                      } finally {
+                        // Set loading to false
+                        treatmentController.setLoading(false);
+                      }
+                    },
+                    child: Text(
+                      'View Treatment'.tr,
+                      style: TextStyle(
+                        fontSize: buttonFontSize, // Use responsive font size
+                      ),
                     ),
-                  ),
-                )
-                    : Container();
-              }),
-            ],
+                  )
+                      : Container();
+                }),
+              ],
+            ),
           ),
         ),
       ),

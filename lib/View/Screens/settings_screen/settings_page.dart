@@ -103,7 +103,7 @@ class SettingsPage extends StatelessWidget {
                     // Ensure this is an observable
                     key: const ValueKey('themeSwitch'),
                     fontSize:
-                        fontSize, // Pass the responsive font size to the CustomSwitch
+                        fontSize,
                   )),
             ),
             Divider(
@@ -111,12 +111,12 @@ class SettingsPage extends StatelessWidget {
               endIndent: dividerIndent,
               color: Colors.grey,
             ),
-            // ListTile(
-            //   title: Text('Change Language'.tr,
-            //       style: TextStyle(fontSize: fontSize)),
-            //   trailing: _buildLanguageText(fontSize),
-            //   onTap: () => _showLanguageDialog(context),
-            // ),
+            ListTile(
+              title: Text('Change Language'.tr,
+                  style: TextStyle(fontSize: fontSize)),
+              trailing: _buildLanguageText(fontSize),
+              onTap: () => _showLanguageDialog(context),
+            ),
           ],
         ),
       ),

@@ -1,15 +1,13 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
+import 'package:get/get.dart' as getx;
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../API/api_helper.dart';
 import '../Model/api_key_model.dart';
 import '../Model/skin_detection_api_model.dart';
 
-class ApiController extends GetxController {
+class ApiController extends getx.GetxController {
   var selectedImage = Rxn<File>();
   var isLoading = false.obs;
   var bodyPartData = ''.obs;
@@ -37,28 +35,18 @@ class ApiController extends GetxController {
 
     try {
       final ApiKeyResponse fetchedApiKeyResponse = await _apiService.fetchKey();
-      final String fetchedApiKey = fetchedApiKeyResponse.key; // Extract the key
-      apiKey.value = fetchedApiKey; // Assign only the key to apiKey
+      final String fetchedApiKey = fetchedApiKeyResponse.key;
+      apiKey.value = fetchedApiKey;
 
-      _dio.options.headers['ailabapi-api-key'] = fetchedApiKey;
+      ApiResponse apiResponse = await _apiService.uploadImageAndGetResults(selectedImage.value!, fetchedApiKey);
 
-      var formData = dio.FormData.fromMap({
-        'image': await dio.MultipartFile.fromFile(selectedImage.value!.path),
-      });
-
-      final response = await _dio.post(_apiService.url, data: formData);
-
-      if (response.statusCode == 200) {
-        ApiResponse apiResponse = ApiResponse.fromJson(response.data);
-
-        diseaseData.value = Map<String, double>.from(apiResponse.data.resultsEnglish);
-        bodyPartData.value = apiResponse.data.bodyPart;
-        resultData.value = apiResponse.data.bodyPart;
-      } else {
-        resultData.value = 'Failed to load data';
-      }
+      diseaseData.value = Map<String, double>.from(apiResponse.data.resultsEnglish);
+      bodyPartData.value = apiResponse.data.bodyPart;
+      resultData.value = apiResponse.data.bodyPart;
     } on DioException catch (e) {
       resultData.value = 'Error: ${e.message}';
+    } catch (e) {
+      resultData.value = 'Error: $e';
     } finally {
       isLoading.value = false;
     }
