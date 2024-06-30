@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:natural_cosmetics/Model/constants.dart';
 import '../../../Model/conditions_model.dart';
 import '../../Widgets/header_text.dart';
@@ -27,7 +28,7 @@ class RecipeDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text(recipe?.recipeName ?? 'Recipe Details'),
+        title: Text('Recipe Details'.tr),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -35,7 +36,7 @@ class RecipeDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HeaderText(text: 'Ingredients'),
+              HeaderText(text: 'ingredients'.tr),
               const SizedBox(height: 10),
               ...recipe?.ingredients?.map(
                     (ingredient) => ListTile(
@@ -47,7 +48,7 @@ class RecipeDetailPage extends StatelessWidget {
                   ) ??
                   [],
               const SizedBox(height: 20),
-              const HeaderText(text: 'How to Prepare'),
+              HeaderText(text: 'How to Prepare'.tr),
               const SizedBox(height: 10),
               ...recipe?.howToPrepare?.map(
                     (step) => ListTile(
@@ -59,7 +60,7 @@ class RecipeDetailPage extends StatelessWidget {
                   ) ??
                   [],
               const SizedBox(height: 20),
-              const HeaderText(text: 'How to Use'),
+              HeaderText(text: 'How to Use'.tr),
               const SizedBox(height: 10),
               ...recipe?.howToUse?.map(
                     (step) => ListTile(
@@ -71,7 +72,7 @@ class RecipeDetailPage extends StatelessWidget {
                   ) ??
                   [],
               const SizedBox(height: 20),
-              const HeaderText(text: 'Images'),
+              HeaderText(text: 'Images'.tr),
               const SizedBox(height: 10),
               GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
@@ -96,7 +97,7 @@ class RecipeDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const HeaderText(text: 'Medical Resources'),
+              HeaderText(text: 'Medical resources'.tr),
               const SizedBox(height: 10),
               ...recipe?.links?.map(
                     (link) => ListTile(

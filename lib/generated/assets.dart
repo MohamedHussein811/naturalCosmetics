@@ -12,7 +12,5 @@ class Assets {
   static const String assetsUntitledDesign = 'assets/Untitled_design.png';
   static const String logoIntrosNatureGlowLogo = 'assets/logo_intros/natureGlowLogo.png';
   static const String musicBacgroundMusic = 'assets/music/bacground_music.mp3';
-  static const String tenserflowLabels = 'assets/tenserflow/labels.txt';
-  static const String tenserflowModelUnquant = 'assets/tenserflow/model_unquant.tflite';
 
 }

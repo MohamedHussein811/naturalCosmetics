@@ -62,14 +62,14 @@ class ConditionDetailPage extends StatelessWidget {
                     height: 10,
                   ),
                   const Divider(),
-                  const HeaderText(
-                    text: "Medical Resources",
+                  HeaderText(
+                    text: "Medical resources".tr,
                   ),
                   ListTile(
                     leading: const Icon(Icons.link),
-                    title: const Text(
-                      'Medical Resource',
-                      style: TextStyle(color: Colors.blue),
+                    title: Text(
+                      'Medical resource'.tr,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                     onTap: () {
                       _launchURL(condition!.conditionLink!);
@@ -79,8 +79,8 @@ class ConditionDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const HeaderText(
-                    text: 'Useful Tips',
+                  HeaderText(
+                    text: 'Useful tips'.tr,
                   ),
                   const SizedBox(
                     height: 10,
@@ -95,8 +95,8 @@ class ConditionDetailPage extends StatelessWidget {
                     height: 10,
                   ),
                   const Divider(),
-                  const HeaderText(
-                    text: "Recipes",
+                  HeaderText(
+                    text: "recipes".tr,
                   ),
                   ...?condition?.recipes?.map(
                     (recipe) => ListTile(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as getx; // Add prefix here
 import 'package:natural_cosmetics/Model/constants.dart';
-
-import '../../../Model/conditions_model.dart';
+import '../../../Model/conditions_model.dart'; // Your model import
 import '../../Widgets/condition_card.dart';
+
 
 class BodyPartConditionsScreen extends StatelessWidget {
   final String bodyPart;
@@ -23,7 +24,7 @@ class BodyPartConditionsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text('Conditions for $bodyPart'),
+        title: Text('${'Conditions for'.tr} $bodyPart'),
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
