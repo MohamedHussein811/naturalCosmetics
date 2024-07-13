@@ -7,6 +7,7 @@ import '../Model/conditions_model.dart';
 import '../Model/skin_detection_api_model.dart';
 
 class ApiService {
+
   final Dio _dio = Dio();
   final String baseUrl =
       'https://raw.githubusercontent.com/KIRRAA0/natural_cosmetics_data/main/diseases_data.json';
